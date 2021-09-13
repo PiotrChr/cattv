@@ -9,6 +9,10 @@ def print_hi(name):
     print(f'Hi, {name}')  # Press ⌘F8 to toggle the breakpoint.
 
 
+# TODO: Run buttoncontroller thread
+# TODO: Setup button handler
+# TODO: Run video for 5 min if pressed
+
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     print_hi('PyCharm')

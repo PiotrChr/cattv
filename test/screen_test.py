@@ -1,6 +1,7 @@
-from lib.gpio import Gpio
+import RPi.GPIO as GPIO
 
-gpio = Gpio()
+GPIO.setwarnings(False)
+GPIO.setmode(GPIO.BCM)
 
-gpio.setup(13, GPIO.OUT)
-gpio.output(pin, 1)
+GPIO.setup(13, GPIO.OUT)
+GPIO.output(pin, 1)

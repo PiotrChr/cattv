@@ -4,6 +4,8 @@ import time
 BTN1 = 5
 BTN2 = 6
 
+GPIO.setwarnings(False)
+GPIO.setmode(GPIO.BCM)
 GPIO.setup(BTN1, GPIO.IN)
 GPIO.setup(BTN2, GPIO.IN)
 

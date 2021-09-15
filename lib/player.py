@@ -1,5 +1,6 @@
 import pyglet
 from settings import settings
+import numpy.core.multiarray
 import cv2
 import numpy as np
 import time

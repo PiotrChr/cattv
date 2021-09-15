@@ -1,15 +1,17 @@
 settings = {
-    'main_video': '1.mp4',
+    'resolution': (2880, 1800),
+    'video_timeout': 15,
+    'main_video': 'resources/1.mp4',
     'videos': [
-        '1.mp4'
+        'resources/1.mp4'
     ],
     'screen': {
-        'pin': 17
+        'pin': 13
     },
     'btn_red': {
-        'pin': 23
+        'pin': 5
     },
     'btn_black': {
-        'pin': 24
+        'pin': 6
     },
 }

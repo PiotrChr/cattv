@@ -1,20 +1,45 @@
-# This is a sample Python script.
+from lib.gpio import Gpio
+from lib.screen import Screen
+from lib.buttons import Buttons
+from lib.player import Player
+from service.buttonController import ButtonController
+from settings import settings
+import time
 
-# Press ⌃R to execute it or replace it with your code.
-# Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
+import threading
+
+gpio = Gpio()
+screen = Screen(gpio)
+event = threading.Event()
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press ⌘F8 to toggle the breakpoint.
+def start_handler():
+    screen.screen_on()
+    time.sleep(1)
 
 
-# TODO: Run buttoncontroller thread
+def stop_handler():
+    time.sleep(1)
+    screen.screen_off()
+
+
+player = Player(start_handler=start_handler, stop_handler=stop_handler)
+
+
+def button_handler(red_reading, black_reading):
+    if (red_reading or red_reading) and player.is_running():
+        player.stop()
+
+    if red_reading:
+        player.play_random(settings['videos'][0], settings['video_timeout'])
+
+
+button_controller = ButtonController(Buttons(gpio), event)
+button_controller.set_handler(button_handler)
+
 # TODO: Setup button handler
 # TODO: Run video for 5 min if pressed
 
-# Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    print_hi('PyCharm')
+    button_controller.start()
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/

@@ -44,7 +44,7 @@ class Player:
         cv2.namedWindow(self.window_name, cv2.WINDOW_FREERATIO)
 
     def set_frame(self, frame):
-        self.capture.set(2, frame)
+        self.capture.set(cv2.CAP_PROP_POS_FRAMES, frame)
 
     def get_media_info(self, media):
         result = subprocess.check_output(
@@ -52,13 +52,13 @@ class Player:
             shell=True).decode()
         fields = json.loads(result)['streams'][0]
 
-        duration = fields['tags']['DURATION']
-        fps = eval(fields['r_frame_rate'])
+        duration = float(fields['tags']['DURATION'])
+        fps = float(eval(fields['r_frame_rate']))
 
         return duration, fps
 
     def get_random_frame(self):
-        return random.randint(0, self.duration * self.fps)
+        return random.randint(0, int(self.duration * self.fps))
 
     def get_frame(self, start_time, fps):
         return start_time * fps
@@ -77,7 +77,7 @@ class Player:
 
         self.set_frame(self.get_random_frame())
 
-        while self.capture.isOpened() or self.should_stop(timeout):
+        while self.capture.isOpened():
             # Capture frame-by-frame
             ret, frame = self.capture.read()
             if ret:
@@ -86,7 +86,7 @@ class Player:
                 cv2.imshow(self.window_name, new_frame)
 
                 # Press Q on keyboard to  exit
-                if cv2.waitKey(25) & 0xFF == ord('q'):
+                if (cv2.waitKey(25) & 0xFF == ord('q')) or self.should_stop(timeout):
                     break
 
             # Break the loop

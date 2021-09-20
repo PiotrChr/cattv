@@ -33,12 +33,12 @@ def button_handler(red_reading, black_reading):
     if red_reading:
         player.play_random(settings['videos'][0], settings['video_timeout'])
 
+    if black_reading:
+        player.play_random(settings['videos'][1], settings['video_timeout'])
+
 
 button_controller = ButtonController(Buttons(gpio), event)
 button_controller.set_handler(button_handler)
-
-# TODO: Setup button handler
-# TODO: Run video for 5 min if pressed
 
 if __name__ == '__main__':
     button_controller.start()

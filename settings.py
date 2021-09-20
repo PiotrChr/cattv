@@ -1,9 +1,10 @@
 settings = {
-    'resolution': (2880, 1800),
-    'video_timeout': 15,
+    'resolution': (656, 512),
+    'video_timeout': 120,
     'main_video': 'resources/1.mp4',
     'videos': [
-        'resources/1.mp4'
+        'resources/1.mp4',
+        'resources/2.mp4'
     ],
     'screen': {
         'pin': 13

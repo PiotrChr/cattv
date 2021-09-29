@@ -45,12 +45,14 @@ class ButtonController(baseService.BaseService):
             print('running')
             now = time.time()
             if now - self.lastLockTime < self.LOCK_TIME:
+                print('skipping')
                 continue
 
             red_reading = self.buttons.read_red()
             black_reading = self.buttons.read_black()
 
             if red_reading or black_reading:
+                print('handling')
                 self.lastLockTime = now
                 handler(red_reading, black_reading)
             self.event.wait(0.1)

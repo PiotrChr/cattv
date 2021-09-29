@@ -52,3 +52,5 @@ class ButtonController(baseService.BaseService):
                 self.lastLockTime = now
                 handler(red_reading, black_reading)
             self.event.wait(0.1)
+
+        print('stopping')

@@ -40,6 +40,7 @@ class ButtonController(baseService.BaseService):
         self.stop = True
 
     def worker(self, handler, stop):
+        print('starting')
         while True and not self.stop:
             now = time.time()
             if now - self.lastLockTime < self.LOCK_TIME:

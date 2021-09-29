@@ -42,6 +42,7 @@ class ButtonController(baseService.BaseService):
     def worker(self, handler, stop):
         print('starting')
         while True and not self.stop:
+            print('running')
             now = time.time()
             if now - self.lastLockTime < self.LOCK_TIME:
                 continue

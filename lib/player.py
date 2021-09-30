@@ -58,7 +58,9 @@ class Player:
 
     def get_random_frame(self):
         random_frame = random.randint(0, int(self.duration * self.fps))
+        print('fps', self.fps)
         print('duration: ', self.duration)
+        print('duration frames: ', self.duration * self.fps)
         print('random_frame: ', random_frame)
         return random_frame
 
@@ -80,17 +82,20 @@ class Player:
 
         print('setting frame')
         self.set_frame(self.get_random_frame())
-        print('playing randing')
+        print('playing random')
         while self.capture.isOpened():
+            print('playing frames')
             # Capture frame-by-frame
             ret, frame = self.capture.read()
             if ret:
+                print('returning frame')
                 new_frame = cv2.resize(frame, self.resolution, interpolation=cv2.INTER_AREA)
                 # Display the resulting frame
                 cv2.imshow(self.window_name, new_frame)
 
                 # Press Q on keyboard to  exit
                 if (cv2.waitKey(25) & 0xFF == ord('q')) or self.should_stop(timeout):
+                    print('received quit signal')
                     break
 
             # Break the loop

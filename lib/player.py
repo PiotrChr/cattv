@@ -29,7 +29,7 @@ class Player:
 
     def load(self, media):
         self.capture = cv2.VideoCapture('../' + media)
-
+        time.sleep(0.5)
         if not self.capture.isOpened():
             print("Error opening video  file")
 
@@ -52,7 +52,7 @@ class Player:
             shell=True).decode()
         fields = json.loads(result)['streams'][0]
 
-        duration = float(fields['tags']['DURATION'])
+        duration = float(fields['duration'])
         fps = float(eval(fields['r_frame_rate']))
 
         return duration, fps

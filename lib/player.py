@@ -57,7 +57,10 @@ class Player:
         return duration, fps
 
     def get_random_frame(self):
-        return random.randint(0, int(self.duration * self.fps))
+        random_frame = random.randint(0, int(self.duration * self.fps))
+        print('duration: ', self.duration)
+        print('random_frame: ', random_frame)
+        return random_frame
 
     def get_frame(self, start_time, fps):
         return start_time * fps

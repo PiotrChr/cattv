@@ -71,7 +71,7 @@ class Player:
         self.stop = True
 
     def should_stop(self, timeout):
-        return self.start_time + timeout > time.time() or self.stop
+        return self.start_time + timeout < time.time() or self.stop
 
     def play_random(self, media, timeout):
         print('start handler')

@@ -42,7 +42,7 @@ cap.set(cv2.CAP_PROP_POS_FRAMES, random_frame)
 # Read until video is completed
 
 start_time = time.time()
-duration = 5
+duration = 15
 
 def should_stop():
     return start_time + duration < time.time()

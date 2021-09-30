@@ -29,9 +29,9 @@ class Player:
 
     def load(self, media):
         self.capture = cv2.VideoCapture('../' + media)
-        time.sleep(0.5)
-        # if not self.capture.isOpened():
-        #     print("Error opening video  file")
+
+        if not self.capture.isOpened():
+            print("Error opening video  file")
 
         (duration, fps) = self.get_media_info(media)
 

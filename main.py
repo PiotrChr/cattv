@@ -34,11 +34,11 @@ def button_handler(red_reading, black_reading):
 
     if red_reading:
         settings['debug'] and print('1btn read')
-        player.play_random(settings['videos'][0], settings['video_timeout'])
+        player.start(settings['videos'][0], settings['video_timeout'])
 
     if black_reading:
         settings['debug'] and print('2btn read')
-        player.play_random(settings['videos'][1], settings['video_timeout'])
+        player.start(settings['videos'][1], settings['video_timeout'])
 
 
 button_controller = ButtonController(Buttons(gpio), event)

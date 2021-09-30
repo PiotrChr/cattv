@@ -2,6 +2,7 @@ from . import baseService
 import lib.buttons as libbuttons
 import threading
 import time
+from settings import settings
 
 
 class ButtonController(baseService.BaseService):
@@ -25,11 +26,11 @@ class ButtonController(baseService.BaseService):
         self.handler = handler
 
     def start(self):
-        print('starting thread')
+        settings['debug'] and print('starting thread')
         self.stop = False
         self.t = threading.Thread(
             target=self.worker,
-            daemon=True,
+            daemon=False,
             args=(
                 self.handler,
                 self.stop,

@@ -28,11 +28,11 @@ class Player:
         return self.capture and self.capture.isOpened()
 
     def start(self, media, timeout):
-        print('starting player thread')
+        settings['debug'] and print('starting player thread')
         self.stop = False
         self.t = threading.Thread(
             target=self.play_random,
-            daemon=False,
+            daemon=True,
             args=(
                 media,
                 timeout

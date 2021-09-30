@@ -25,7 +25,7 @@ class Player:
         self.init()
 
     def is_running(self):
-        return self.capture.isOpened()
+        return self.capture and self.capture.isOpened()
 
     def load(self, media):
         self.capture = cv2.VideoCapture('../' + media)

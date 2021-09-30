@@ -26,7 +26,7 @@ class Player:
         return self.capture and self.capture.isOpened()
 
     def load(self, media):
-        self.capture = cv2.VideoCapture('../' + media)
+        self.capture = cv2.VideoCapture(media)
 
         if not self.capture.isOpened():
             print("Error opening video file")

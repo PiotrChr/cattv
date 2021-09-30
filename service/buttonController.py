@@ -41,23 +41,15 @@ class ButtonController(baseService.BaseService):
         self.stop = True
 
     def worker(self, handler, stop):
-        print('starting worker')
-        while True:
-            print('in a loop', flush=True)
-        # while True and not self.stop:
-        #     print('running', flush=True)
-        #     now = time.time()
-        #     if now - self.lastLockTime < self.LOCK_TIME:
-        #         print('skipping', flush=True)
-        #         continue
-        #
-        #     red_reading = self.buttons.read_red()
-        #     black_reading = self.buttons.read_black()
-        #
-        #     if red_reading or black_reading:
-        #         print('handling', flush=True)
-        #         self.lastLockTime = now
-        #         handler(red_reading, black_reading)
-        #     self.event.wait(0.1)
+        while True and not self.stop:
+            now = time.time()
+            if now - self.lastLockTime < self.LOCK_TIME:
+                continue
 
-        # print('stopping', flush=True)
+            red_reading = self.buttons.read_red()
+            black_reading = self.buttons.read_black()
+
+            if red_reading or black_reading:
+                self.lastLockTime = now
+                handler(red_reading, black_reading)
+            self.event.wait(0.1)

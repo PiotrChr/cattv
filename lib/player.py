@@ -1,4 +1,3 @@
-import pyglet
 from settings import settings
 import numpy.core.multiarray
 import cv2
@@ -13,7 +12,6 @@ class Player:
     def __init__(self, start_handler=None, stop_handler=None):
         self.resolution = settings['resolution']
         self.window_name = "cattv_player"
-        self.window = None
         self.start_handler = start_handler
         self.stop_handler = stop_handler
         self.capture = None
@@ -31,7 +29,7 @@ class Player:
         self.capture = cv2.VideoCapture('../' + media)
 
         if not self.capture.isOpened():
-            print("Error opening video  file")
+            print("Error opening video file")
 
         (duration, fps) = self.get_media_info(media)
 
@@ -39,7 +37,6 @@ class Player:
         self.fps = fps
 
     def init(self):
-        self.window = pyglet.window.Window()
         cv2.namedWindow(self.window_name, cv2.WND_PROP_FULLSCREEN)
         cv2.setWindowProperty(self.window_name, cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
 

@@ -29,7 +29,7 @@ class ButtonController(baseService.BaseService):
         self.stop = False
         self.t = threading.Thread(
             target=self.worker,
-            daemon=False,
+            daemon=True,
             args=(
                 self.handler,
                 self.stop,

@@ -24,19 +24,20 @@ def stop_handler():
     screen.screen_off()
 
 
-player = Player(start_handler=start_handler, stop_handler=stop_handler)
+player = Player(start_handler=start_handler, stop_handler=stop_handler, event=event)
 
 
 def button_handler(red_reading, black_reading):
-    if (red_reading or red_reading) and player.is_running():
+    settings['debug'] and print('btn press detected')
+    if player.is_running():
         player.stop()
 
     if red_reading:
-        print('1btn read')
+        settings['debug'] and print('1btn read')
         player.play_random(settings['videos'][0], settings['video_timeout'])
 
     if black_reading:
-        print('2btn read')
+        settings['debug'] and print('2btn read')
         player.play_random(settings['videos'][1], settings['video_timeout'])
 
 

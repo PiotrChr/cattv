@@ -6,10 +6,12 @@ import time
 import random
 import subprocess
 import json
+from settings import settings
+import threading
 
 
 class Player:
-    def __init__(self, start_handler=None, stop_handler=None):
+    def __init__(self, start_handler=None, stop_handler=None, event=None):
         self.resolution = settings['resolution']
         self.window_name = "cattv_player"
         self.start_handler = start_handler
@@ -19,15 +21,31 @@ class Player:
         self.stop = False
         self.duration = 0
         self.fps = 1
-
-        self.init()
+        self.t = None
+        self.event = event
 
     def is_running(self):
         return self.capture and self.capture.isOpened()
 
+    def start(self, media, timeout):
+        print('starting player thread')
+        self.stop = False
+        self.t = threading.Thread(
+            target=self.play_random,
+            daemon=False,
+            args=(
+                media,
+                timeout
+            )
+        )
+        self.t.start()
+
     def load(self, media):
-        print('loading media: ')
-        print(media)
+        if settings['debug']:
+            print('loading media: ')
+            print(media)
+
+        self.init()
         self.capture = cv2.VideoCapture(media)
 
         if not self.capture.isOpened():
@@ -58,55 +76,55 @@ class Player:
 
     def get_random_frame(self):
         random_frame = random.randint(0, int(self.duration * self.fps))
-        print('fps', self.fps)
-        print('duration: ', self.duration)
-        print('duration frames: ', self.duration * self.fps)
-        print('random_frame: ', random_frame)
+        if settings['debug']:
+            print('fps', self.fps)
+            print('duration: ', self.duration)
+            print('duration frames: ', self.duration * self.fps)
+            print('random_frame: ', random_frame)
         return random_frame
 
     def get_frame(self, start_time, fps):
         return start_time * fps
 
     def stop(self):
+        settings['debug'] and print('received external stop signal')
         self.stop = True
 
     def should_stop(self, timeout):
         return self.start_time + timeout < time.time() or self.stop
 
     def play_random(self, media, timeout):
-        print('start handler')
+        settings['debug'] and print('start handler')
         self.start_handler()
 
         self.load(media)
         self.start_time = time.time()
 
-        print('setting frame')
+        settings['debug'] and print('setting frame')
         self.set_frame(self.get_random_frame())
-        print('playing random')
+        settings['debug'] and print('playing random')
         while self.capture.isOpened():
-            print('playing frames')
             # Capture frame-by-frame
             ret, frame = self.capture.read()
             if ret:
-                print('returning frame')
                 new_frame = cv2.resize(frame, self.resolution, interpolation=cv2.INTER_AREA)
                 # Display the resulting frame
                 cv2.imshow(self.window_name, new_frame)
 
                 # Press Q on keyboard to  exit
                 if (cv2.waitKey(25) & 0xFF == ord('q')) or self.should_stop(timeout):
-                    print('received quit signal')
+                    settings['debug'] and print('received quit signal')
                     break
 
             # Break the loop
             else:
-                print('no return frame')
+                settings['debug'] and print('no return frame')
                 break
 
         self.stop = False
         self.capture.release()
 
-        print('closing all')
+        settings['debug'] and print('closing all')
         # Closes all the frames
         cv2.destroyAllWindows()
         self.stop_handler()

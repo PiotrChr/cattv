@@ -41,7 +41,8 @@ class ButtonController(baseService.BaseService):
 
     def worker(self, handler, stop):
         print('starting')
-        print('stop: ', self.stop)
+        print('asd')
+        print('stop: ')
         while True and not self.stop:
             print('running')
             now = time.time()

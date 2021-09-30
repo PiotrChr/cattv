@@ -41,8 +41,9 @@ class Player:
         self.fps = fps
 
     def init(self):
+        cv2.namedWindow(self.window_name, cv2.WINDOW_FREERATIO)
         # cv2.namedWindow(self.window_name, cv2.WND_PROP_FULLSCREEN)
-        cv2.setWindowProperty(self.window_name, cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
+        # cv2.setWindowProperty(self.window_name, cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
 
     def set_frame(self, frame):
         self.capture.set(cv2.CAP_PROP_POS_FRAMES, frame)

@@ -13,6 +13,6 @@ settings = {
         'pin': 5
     },
     'btn_black': {
-        'pin': 6
+        'pin': 19
     },
 }

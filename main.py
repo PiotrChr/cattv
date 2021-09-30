@@ -12,6 +12,7 @@ gpio = Gpio()
 screen = Screen(gpio)
 event = threading.Event()
 
+screen.screen_off()
 
 def start_handler():
     screen.screen_on()
@@ -31,9 +32,11 @@ def button_handler(red_reading, black_reading):
         player.stop()
 
     if red_reading:
+        print('1btn read')
         player.play_random(settings['videos'][0], settings['video_timeout'])
 
     if black_reading:
+        print('2btn read')
         player.play_random(settings['videos'][1], settings['video_timeout'])
 
 

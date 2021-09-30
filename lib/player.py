@@ -26,6 +26,8 @@ class Player:
         return self.capture and self.capture.isOpened()
 
     def load(self, media):
+        print('loading media: ')
+        print(media)
         self.capture = cv2.VideoCapture(media)
 
         if not self.capture.isOpened():
@@ -67,13 +69,15 @@ class Player:
         return self.start_time + timeout > time.time() or self.stop
 
     def play_random(self, media, timeout):
+        print('start handler')
         self.start_handler()
 
         self.load(media)
         self.start_time = time.time()
 
+        print('setting frame')
         self.set_frame(self.get_random_frame())
-
+        print('playing randing')
         while self.capture.isOpened():
             # Capture frame-by-frame
             ret, frame = self.capture.read()
@@ -88,11 +92,13 @@ class Player:
 
             # Break the loop
             else:
+                print('no return frame')
                 break
 
         self.stop = False
         self.capture.release()
 
+        print('closing all')
         # Closes all the frames
         cv2.destroyAllWindows()
         self.stop_handler()

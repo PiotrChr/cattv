@@ -86,7 +86,7 @@ class Player:
     def get_frame(self, start_time, fps):
         return start_time * fps
 
-    def stop(self):
+    def stop_now(self):
         settings['debug'] and print('received external stop signal')
         self.stop = True
 

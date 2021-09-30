@@ -30,7 +30,7 @@ player = Player(start_handler=start_handler, stop_handler=stop_handler, event=ev
 def button_handler(red_reading, black_reading):
     settings['debug'] and print('btn press detected')
     if player.is_running():
-        player.stop()
+        player.stop_now()
 
     if red_reading:
         settings['debug'] and print('1btn read')

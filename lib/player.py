@@ -35,7 +35,8 @@ class Player:
             daemon=True,
             args=(
                 media,
-                timeout
+                timeout,
+                self.stop
             )
         )
         self.t.start()
@@ -93,7 +94,8 @@ class Player:
     def should_stop(self, timeout):
         return self.start_time + timeout < time.time() or self.stop
 
-    def play_random(self, media, timeout):
+    def play_random(self, media, timeout, stop):
+        self.stop = stop
         settings['debug'] and print('start handler')
         self.start_handler()
 

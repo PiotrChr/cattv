@@ -23,7 +23,7 @@ class Player:
         self.duration = 0
         self.fps = 1
 
-        # self.init()
+        self.init()
 
     def is_running(self):
         return self.capture.isOpened()
@@ -38,8 +38,6 @@ class Player:
 
         self.duration = duration
         self.fps = fps
-
-        self.init()
 
     def init(self):
         self.window = pyglet.window.Window()

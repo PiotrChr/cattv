@@ -25,6 +25,7 @@ class ButtonController(baseService.BaseService):
         self.handler = handler
 
     def start(self):
+        print('starting thread')
         self.stop = False
         self.t = threading.Thread(
             target=self.worker,
@@ -40,8 +41,9 @@ class ButtonController(baseService.BaseService):
         self.stop = True
 
     def worker(self, handler, stop):
+        print('starting worker')
         while True:
-            print('something hey')
+            print('in a loop', flush=True)
         # while True and not self.stop:
         #     print('running', flush=True)
         #     now = time.time()

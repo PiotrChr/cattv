@@ -11,6 +11,7 @@ import json
 
 class Player:
     def __init__(self, start_handler=None, stop_handler=None):
+        print('initiating player')
         self.resolution = settings['resolution']
         self.window_name = "cattv_player"
         self.window = None

@@ -27,6 +27,7 @@ player = Player(start_handler=start_handler, stop_handler=stop_handler)
 
 
 def button_handler(red_reading, black_reading):
+    print('handler triggered')
     if (red_reading or red_reading) and player.is_running():
         player.stop()
 

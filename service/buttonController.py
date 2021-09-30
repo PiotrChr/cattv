@@ -40,9 +40,8 @@ class ButtonController(baseService.BaseService):
         self.stop = True
 
     def worker(self, handler, stop):
-        print('starting', flush=True)
-        print('asd', flush=True)
-        print('stop: ', flush=True)
+        while True:
+            print('something')
         # while True and not self.stop:
         #     print('running', flush=True)
         #     now = time.time()
@@ -59,4 +58,4 @@ class ButtonController(baseService.BaseService):
         #         handler(red_reading, black_reading)
         #     self.event.wait(0.1)
 
-        print('stopping', flush=True)
+        # print('stopping', flush=True)

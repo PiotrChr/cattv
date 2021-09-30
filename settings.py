@@ -1,7 +1,7 @@
 settings = {
     'debug': True,
     'resolution': (656, 512),
-    'video_timeout': 15,
+    'video_timeout': 120,
     'main_video': 'resources/1.mp4',
     'videos': [
         'resources/1.mp4',

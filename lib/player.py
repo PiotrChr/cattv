@@ -114,6 +114,7 @@ class Player:
                 # Press Q on keyboard to  exit
                 if (cv2.waitKey(25) & 0xFF == ord('q')) or self.should_stop(timeout):
                     settings['debug'] and print('received quit signal')
+                    self.stop = False
                     break
 
             # Break the loop

@@ -14,6 +14,7 @@ event = threading.Event()
 
 screen.screen_off()
 
+
 def start_handler():
     screen.screen_on()
     time.sleep(1)

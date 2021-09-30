@@ -28,15 +28,15 @@ random_frame = random.randint(0, int(duration * fps))
 
 window_name = "window"
 
-W = 800
-H = 600
+W = 656
+H = 512
 
 # Check if camera opened successully
 if (cap.isOpened()== False):
     print("Error opening video  file")
 
-cv2.namedWindow(window_name, cv2.WINDOW_FREERATIO)
-# cv2.setWindowProperty(window_name, cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
+cv2.namedWindow(window_name, cv2.WND_PROP_FULLSCREEN)
+cv2.setWindowProperty(window_name, cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
 print(random_frame, duration, fps)
 cap.set(cv2.CAP_PROP_POS_FRAMES, random_frame)
 # Read until video is completed

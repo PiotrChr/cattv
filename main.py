@@ -17,11 +17,9 @@ screen.screen_off()
 
 def start_handler():
     screen.screen_on()
-    time.sleep(1)
 
 
 def stop_handler():
-    time.sleep(1)
     screen.screen_off()
 
 

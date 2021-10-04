@@ -31,6 +31,9 @@ def button_handler(red_reading, black_reading):
     if player.is_running():
         player.stop_now()
 
+    while player.is_running():
+        time.sleep(0.2)
+
     if red_reading:
         settings['debug'] and print('1btn read')
         player.start(settings['videos'][0], settings['video_timeout'])

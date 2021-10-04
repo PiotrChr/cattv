@@ -89,10 +89,10 @@ class Player:
         self.t.do_stop = True
 
     def should_stop(self, timeout):
+        print('Should stop: ', getattr(self.t, 'do_stop', False))
         return self.start_time + timeout < time.time() or getattr(self.t, 'do_stop', False)
 
     def play_random(self, media, timeout):
-
         settings['debug'] and print('start handler')
         self.start_handler()
 

@@ -16,10 +16,12 @@ screen.screen_off()
 
 
 def start_handler():
+    settings['debug'] and print('Screen ON')
     screen.screen_on()
 
 
 def stop_handler():
+    settings['debug'] and print('Screen OFF')
     screen.screen_off()
 
 

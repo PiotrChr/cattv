@@ -1,7 +1,6 @@
 from settings import settings
 import numpy.core.multiarray
 import cv2
-import numpy as np
 import time
 import random
 import subprocess
@@ -18,7 +17,6 @@ class Player:
         self.stop_handler = stop_handler
         self.capture = None
         self.start_time = None
-        self.stop = False
         self.duration = 0
         self.fps = 1
         self.t = None
@@ -35,8 +33,7 @@ class Player:
             daemon=True,
             args=(
                 media,
-                timeout,
-                self.stop
+                timeout
             )
         )
         self.t.start()
@@ -89,13 +86,13 @@ class Player:
 
     def stop_now(self):
         settings['debug'] and print('received external stop signal')
-        self.stop = True
+        self.t.do_stop = True
 
     def should_stop(self, timeout):
-        return self.start_time + timeout < time.time() or self.stop
+        return self.start_time + timeout < time.time() or getattr(self.t, 'do_stop', False)
 
-    def play_random(self, media, timeout, stop):
-        self.stop = stop
+    def play_random(self, media, timeout):
+
         settings['debug'] and print('start handler')
         self.start_handler()
 
@@ -116,7 +113,7 @@ class Player:
                 # Press Q on keyboard to  exit
                 if (cv2.waitKey(25) & 0xFF == ord('q')) or self.should_stop(timeout):
                     settings['debug'] and print('received quit signal')
-                    self.stop = False
+                    self.t.do_stop = False
                     break
 
             # Break the loop
@@ -124,7 +121,7 @@ class Player:
                 settings['debug'] and print('no return frame')
                 break
 
-        self.stop = False
+        self.t.do_stop = False
         self.capture.release()
 
         settings['debug'] and print('closing all')
